@@ -16,9 +16,9 @@ The project started because of a common usecase for an endpoint (HTTP) to ingest
   <img src="https://github.com/marceloboeira/crowd/blob/master/docs/problem.png?raw=true" width="500">
 </p>
 
-On a company that I used to work for, that was the case for the entry point of leads, the source of 💰. As the image above shows, both the **database writes** and **mailing** were triggered on time of the request. We'll have seen that, is a pretty common pattern.
+On a company that I used to work for, that was the case for the entry point of leads, which is the source of 💰 that must be always available.
 
-The problem is that scaling it creates all sorts of issues, mostly unnecessary ones. People try to scale the database to handle the back-pressure, which even if you have to do it, you don't want to depend entirely on a database write to handle enormous data ingestion.
+As the image above shows, both the **database writes** and **mailing** were triggered on time of the request. We'll have seen that, is a pretty common pattern. The problem is that scaling it creates all sorts of issues, mostly unnecessary ones. People try to scale the database to handle the back-pressure, which even if you have to do it, you don't want to depend entirely on a database write to handle enormous data ingestion.
 
 Also, you probably handle different loads during the day, or time of the year, which would make you pay for a database on the worst-case-scenario but only make use of it during the spikes.
 
@@ -48,20 +48,21 @@ Transfer-Encoding: Identity
 {"status": "OK"}
 ```
 
-The whole point is to have a **high available** endpoint to avoid package loss, disregarding the processing. If you need to return something to the user on the time of the request, it's probably not for you.
+### crowd: An alternative
+
+The whole point of crowd is to have a **high available** endpoint to avoid package loss, disregarding the processing. If you need to return something to the user on the time of the request, it's probably not for you.
 
 Which is a quite common pattern for data-ingestion in general: statistics, events, tracking, order-placement, queue items, ...
 
-### Use cases
-> Some usecases
+That way you can easily control an acceptable throughput to the rest of your system.
 
-You can use crowd to handle back-pressure on existing endpoints and scale your current REST APIs.
+You can use crowd to handle back-pressure on existing endpoints and scale your current REST APIs:
 
 <p align="center">
   <img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-1.png?raw=true" width="500">
 </p>
 
-Or even as an entrypoint to your stream/queues with multiple consumers of the data:
+Or even as an entrypoint to your stream/queues with multiple consumers:
 
 <p align="center">
   <img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-2.png?raw=true" width="500">
