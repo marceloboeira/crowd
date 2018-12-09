@@ -1,10 +1,9 @@
 <p align="center">
-  <img src="https://github.com/marceloboeira/crowd/blob/master/docs/logo.png?raw=true" width="150">
-  <h3 align="center">crowd</h3>
+  <img src="https://github.com/marceloboeira/crowd/blob/master/docs/logo.png?raw=true" width="200">
+  <h3 align="center" style="margin-top: -100px">crowd</h3>
   <p align="center">High Available Reverse Proxy for Asynchronous Message Consumption<p>
   <p align="center">
     <a href="https://travis-ci.org/marceloboeira/crowd"><img src="https://img.shields.io/travis/marceloboeira/crowd.svg?maxAge=360"></a>
-    <a href="http://waffle.io/marceloboeira/bojack"><img src="https://img.shields.io/waffle/label/marceloboeira/bojack/ready.svg?maxAge=360"></a>
     <a href="http://github.com/marceloboeira/crowd/releases"><img src="https://img.shields.io/github/release/marceloboeira/crowd.svg?maxAge=360"></a>
   </p>
 </p>
@@ -13,7 +12,9 @@
 
 The project started because of a common usecase for an endpoint (HTTP) to ingest data, where the user on the client side expects to receive a delivery confirmation that the message has been received, yet the response itself doens't matter.
 
-<img src="https://github.com/marceloboeira/crowd/blob/master/docs/problem.png?raw=true" width="500">
+<p align="center">
+  <img src="https://github.com/marceloboeira/crowd/blob/master/docs/problem.png?raw=true" width="500">
+</p>
 
 On a company that I used to work for, that was the case for the entry point of leads, the source of 💰. As the image above shows, both the **database writes** and **mailing** were triggered on time of the request. We'll have seen that, is a pretty common pattern.
 
@@ -56,8 +57,12 @@ Which is a quite common pattern for data-ingestion in general: statistics, event
 
 You can use crowd to handle back-pressure on existing endpoints and scale your current REST APIs.
 
-<img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-1.png?raw=true" width="500">
+<p align="center">
+  <img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-1.png?raw=true" width="500">
+</p>
 
 Or even as an entrypoint to your stream/queues with multiple consumers of the data:
 
-<img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-2.png?raw=true" width="500">
+<p align="center">
+  <img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-2.png?raw=true" width="500">
+</p>
