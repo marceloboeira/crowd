@@ -1,0 +1,2 @@
+POST http://localhost:9000/api/leads
+@/Users/marceloboeira/go/src/github.com/marceloboeira/crowd/vegeta.json
