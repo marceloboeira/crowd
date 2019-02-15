@@ -1,8 +1,15 @@
-DOCKER_COMPOSE=`which docker-compose`
+DOCKER_COMPOSE  ?= `which docker-compose`
+GO ?= `which go`
+CROWD ?= `pwd`/bin/crowd
+
 
 .PHONY: run
 run:
-	echo RUN
+	$(CROWD)
+
+.PHONY: build
+build:
+	$(GO) build -o $(CROWD) crowd.go
 
 .PHONY: compose
 compose:
