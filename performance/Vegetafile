@@ -1,0 +1,2 @@
+POST http://localhost:2104/api/foo
+@performance/vegeta.json
