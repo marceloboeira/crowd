@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -10,9 +12,21 @@ import (
 	"github.com/aws/aws-sdk-go/service/sqs"
 )
 
+var port int
+var endpoint string
+var queue string
+
+func init() {
+	flag.IntVar(&port, "port", 2104, "HTTP Server Port")
+	flag.StringVar(&endpoint, "endpoint", "/api/foo", "HTTP path to receive POST requests")
+	flag.StringVar(&queue, "queue", "https://sqs.eu-central-1.amazonaws.com/21042018/foo", "URL for the SQS queue")
+	flag.Parse()
+}
+
 func main() {
-	q := sqs.New(session.New())
-	http.HandleFunc("/api/leads", func(w http.ResponseWriter, r *http.Request) {
+	q := sqs.New(session.Must(session.NewSession(&aws.Config{})))
+
+	http.HandleFunc(endpoint, func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 
 		body, err := ioutil.ReadAll(r.Body)
@@ -23,7 +37,7 @@ func main() {
 
 		_, err = q.SendMessage(&sqs.SendMessageInput{
 			MessageBody: aws.String(string(body)),
-			QueueUrl:    aws.String("https://sqs.eu-central-1.amazonaws.com/046001896437/test"),
+			QueueUrl:    aws.String(queue),
 		})
 
 		if err != nil {
@@ -32,5 +46,8 @@ func main() {
 		}
 	})
 
-	http.ListenAndServe(":9000", nil)
+	address := fmt.Sprintf(":%d", port)
+	log.Println("crowd is running at", address, "with", endpoint, "-->", queue)
+
+	http.ListenAndServe(address, nil)
 }
