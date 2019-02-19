@@ -35,17 +35,23 @@
     "service/sqs",
     "service/sts"
   ]
-  revision = "c4e0e593d5f18b478f17ff0e86b56d41a70ced2d"
-  version = "v1.16.2"
+  revision = "33f1087245887dc9a8090de089808120b299bbec"
+  version = "v1.17.0"
 
 [[projects]]
   name = "github.com/jmespath/go-jmespath"
   packages = ["."]
   revision = "c2b33e84"
 
+[[projects]]
+  name = "github.com/julienschmidt/httprouter"
+  packages = ["."]
+  revision = "348b672cd90d8190f8240323e372ecd1e66b59dc"
+  version = "v1.2.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b0e75914b2c1d2a45c5059896a7967f23912618f7e1f3ab29716b11bcef982bd"
+  inputs-digest = "b678ba919094cfed15ebae3e054e742a896c3d32a7ee9327891ab934cf1e171e"
   solver-name = "gps-cdcl"
   solver-version = 1

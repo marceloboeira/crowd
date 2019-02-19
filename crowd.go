@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
+	"github.com/julienschmidt/httprouter"
 )
 
 var port int
@@ -26,7 +27,8 @@ func init() {
 func main() {
 	q := sqs.New(session.Must(session.NewSession(&aws.Config{})))
 
-	http.HandleFunc(endpoint, func(w http.ResponseWriter, r *http.Request) {
+	router := httprouter.New()
+	router.POST(endpoint, func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		defer r.Body.Close()
 
 		body, err := ioutil.ReadAll(r.Body)
@@ -49,5 +51,5 @@ func main() {
 	address := fmt.Sprintf(":%d", port)
 	log.Println("crowd is running at", address, "with", endpoint, "-->", queue)
 
-	http.ListenAndServe(address, nil)
+	http.ListenAndServe(address, router)
 }
