@@ -83,3 +83,5 @@ It is important to notice that, for most projects, you could probably rewrite yo
 * `make install` - install all the go dependencies with dep.
 * `make build` - build the `crowd` executable.
 * `make run` - start a crowd server with default values.
+* `make compose` - start docker compose with dependencies (sqs local, ...).
+* `make decompose` - stop docker compose containers.

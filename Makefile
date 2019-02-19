@@ -6,20 +6,20 @@ CROWD ?= `pwd`/bin/crowd
 
 .PHONY: build
 build:
-	$(GO) build -o $(CROWD) $(CROWD_ENTRYPOINT)
+	@$(GO) build -o $(CROWD) $(CROWD_ENTRYPOINT)
 
 .PHONY: install
 install:
-	$(DEP) ensure
+	@$(DEP) ensure
 
 .PHONY: run
 run:
-	$(CROWD)
+	@$(CROWD)
 
 .PHONY: compose
 compose:
-	$(DOCKER_COMPOSE) up
+	@$(DOCKER_COMPOSE) up
 
 .PHONY: decompose
 decompose:
-	$(DOCKER_COMPOSE) down
+	@$(DOCKER_COMPOSE) down

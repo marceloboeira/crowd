@@ -1,2 +1,2 @@
-POST http://localhost:2104/api/foo
+POST http://localhost:2104/api/sample
 @vegeta.json

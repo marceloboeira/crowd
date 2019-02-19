@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  sqs:
+    image: vsouza/sqs-local
+    ports:
+      - "9324:9324"
