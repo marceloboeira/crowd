@@ -1,0 +1,9 @@
+# golang
+vendor/
+!vendor/*.keep
+
+bin/
+!bin/*.keep
+
+# performance
+performance/report*

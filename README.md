@@ -75,3 +75,11 @@ Or even as an entrypoint to your stream/queues with multiple consumers:
 ### Disclaimer
 
 It is important to notice that, for most projects, you could probably rewrite your endpoints to push directly to queues and call it a day. However, the scenario where this idea was conceived would involve having to come up with a standard way of doing this across multiple languages, frameworks, teams,... which would be more expensive than implementing only once and solving it as an infrastructural problem.
+
+# Contributing
+
+## Commands
+
+* `make install` - install all the go dependencies with dep.
+* `make build` - build the `crowd` executable.
+* `make run` - start a crowd server with default values.
