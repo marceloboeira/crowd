@@ -8,6 +8,10 @@
   </p>
 </p>
 
+## Status
+
+⚠️  At the moment the project is just a spike, don't take it too seriously.
+
 ## Motivation
 
 The project started because of a common usecase for an endpoint (HTTP) to ingest data, where the user on the client side expects to receive a delivery confirmation that the message has been received, yet the response itself doens't matter.
@@ -56,7 +60,7 @@ Which is a quite common pattern for data-ingestion in general: statistics, event
 
 That way you can easily control an acceptable throughput to the rest of your system.
 
-You can use crowd to handle back-pressure on existing endpoints and scale your current REST APIs:
+You can use crowd to handle back-pressure on existing endpoints and scale your current REST APIs to consume the messages later:
 
 <p align="center">
   <img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-1.png?raw=true" width="500">
@@ -67,3 +71,7 @@ Or even as an entrypoint to your stream/queues with multiple consumers:
 <p align="center">
   <img src="https://github.com/marceloboeira/crowd/blob/master/docs/usecase-2.png?raw=true" width="500">
 </p>
+
+### Disclaimer
+
+It is important to notice that, for most projects, you could probably rewrite your endpoints to push directly to queues and call it a day. However, the scenario where this idea was conceived would involve having to come up with a standard way of doing this across multiple languages, frameworks, teams,... which would be more expensive than implementing only once and solving it as an infrastructural problem.
