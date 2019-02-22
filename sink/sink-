@@ -1,0 +1,9 @@
+package sink
+
+import (
+	"io"
+)
+
+type Sink interface {
+	Push(r io.Reader) error
+}

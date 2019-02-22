@@ -1,0 +1,41 @@
+package sink
+
+import (
+	"io"
+	"io/ioutil"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/sqs"
+)
+
+type SQS struct {
+	queueURL      string
+	queueInstance *sqs.SQS
+}
+
+func NewSQS(url string) *SQS {
+	return &SQS{
+		queueInstance: sqs.New(session.Must(session.NewSession(&aws.Config{}))),
+		queueURL:      url,
+	}
+
+}
+
+func (s *SQS) Push(reader io.Reader) error {
+	content, err := ioutil.ReadAll(reader)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.queueInstance.SendMessage(&sqs.SendMessageInput{
+		MessageBody: aws.String(string(content)),
+		QueueUrl:    aws.String(s.queueURL),
+	})
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
