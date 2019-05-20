@@ -5,4 +5,4 @@ default: benchmark
 
 .PHONY: benchmark
 benchmark:
-	@cat Vegetafile | $(VEGETA) attack -duration=1m  -rate=500 | $(VEGETA) report -reporter=text
+	@cat Vegetafile | $(VEGETA) attack -duration=1m  -rate=500 | $(VEGETA) report -type=text
