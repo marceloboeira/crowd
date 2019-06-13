@@ -16,6 +16,10 @@ install:
 run:
 	@$(CROWD)
 
+.PHONY: test
+test:
+	@$(GO) test -v ./...
+
 .PHONY: compose
 compose:
 	@$(DOCKER_COMPOSE) up
