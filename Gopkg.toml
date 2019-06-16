@@ -9,3 +9,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/go-redis/redis"
+  version = "6.15.3"

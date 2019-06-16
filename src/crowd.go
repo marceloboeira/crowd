@@ -1,37 +1,47 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 
-	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
-
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/sqs"
+	"github.com/14-bits/crowd/pkg/sink"
 	"github.com/julienschmidt/httprouter"
 )
 
 var port int
 var endpoint string
-var queue string
+var sinkType string
+var sinkUrl string
 
 func init() {
 	flag.IntVar(&port, "port", 2104, "HTTP Server Port")
 	flag.StringVar(&endpoint, "endpoint", "/api/foo", "HTTP path to receive POST requests")
-	flag.StringVar(&queue, "queue", "https://sqs.eu-central-1.amazonaws.com/21042018/foo", "URL for the SQS queue")
+	flag.StringVar(&sinkType, "sink-type", "void", "Sink adapter, e.g.: void, sqs, redis...")
+	flag.StringVar(&sinkUrl, "sink-url", "void", "Connection String/URL for the the sink")
 	flag.Parse()
 }
 
-type Queue struct {
-	Client sqsiface.SQSAPI
-	URL    string
+type Sink interface {
+	Push(payload []byte) error
 }
+
 type Crowd struct {
-	q Queue
+	s Sink
+}
+
+func selectSink(name string, url string) (Sink, error) {
+	switch name {
+	case "sqs":
+		return sink.NewSQS(url), nil
+	case "void":
+		return sink.NewVoid(url), nil
+	default:
+		return nil, errors.New("sink is not supported")
+	}
 }
 
 func (c *Crowd) Handle(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -43,10 +53,7 @@ func (c *Crowd) Handle(w http.ResponseWriter, r *http.Request, _ httprouter.Para
 		return
 	}
 
-	_, err = c.q.Client.SendMessage(&sqs.SendMessageInput{
-		MessageBody: aws.String(string(body)),
-		QueueUrl:    aws.String(queue),
-	})
+	err = c.s.Push(body)
 
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -55,15 +62,18 @@ func (c *Crowd) Handle(w http.ResponseWriter, r *http.Request, _ httprouter.Para
 }
 
 func main() {
-	c := sqs.New(session.Must(session.NewSession(&aws.Config{})))
-	q := Queue{Client: c}
-	crowd := Crowd{q: q}
+	s, err := selectSink(sinkType, sinkUrl)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	crowd := Crowd{s}
 
 	router := httprouter.New()
 	router.POST(endpoint, crowd.Handle)
 
 	address := fmt.Sprintf(":%d", port)
-	log.Println("crowd is running at", address, "with", endpoint, "-->", queue)
+	log.Println("crowd is running at", address, "with", endpoint, "-->", sinkType)
 
 	http.ListenAndServe(address, router)
 }
