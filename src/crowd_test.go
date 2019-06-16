@@ -7,29 +7,18 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/service/sqs"
-	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
-
+	"github.com/14-bits/crowd/pkg/sink"
 	"github.com/julienschmidt/httprouter"
 )
 
-type mockSQS struct {
-	sqsiface.SQSAPI
-	Resp sqs.SendMessageOutput
-}
-
-func (m mockSQS) SendMessage(*sqs.SendMessageInput) (*sqs.SendMessageOutput, error) {
-	return &m.Resp, nil
-}
-
 func TestCrowd(t *testing.T) {
-	q := Queue{
-		Client: mockSQS{},
-		URL:    "http://localhost:9324",
+	c := Crowd{
+		S: sink.NewVoid(),
 	}
-	crowd := Crowd{q: q}
+
 	router := httprouter.New()
-	router.POST("/api/foo", crowd.Handle)
+	router.POST("/api/foo", c.Handle)
+
 	data := url.Values{}
 	data.Add("foo", "bar")
 
