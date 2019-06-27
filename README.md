@@ -80,9 +80,11 @@ It is important to notice that, for most projects, you could probably rewrite yo
 
 ## Commands
 
-* `make install` - install all the go dependencies with dep.
-* `make build` - build the `crowd` executable.
-* `make run` - start a crowd server with default values.
-* `make test` - run tests
-* `make compose` - start docker compose with dependencies (sqs local, ...).
-* `make decompose` - stop docker compose containers.
+```
+make help                           Lists the available commands
+make install                        Installs app dependencies
+make run                            Runs the app
+make test                           Runs tests
+make compose                        Runs docker compose dependencies
+make decompose                      Stops docker compose dependencies
+```
