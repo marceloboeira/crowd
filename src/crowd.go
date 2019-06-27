@@ -39,6 +39,8 @@ func selectSink(name string, url string) (Sink, error) {
 		return sink.NewSQS(url), nil
 	case "void":
 		return sink.NewVoid(), nil
+	case "redis":
+		return sink.NewRedis(url), nil
 	default:
 		return nil, errors.New("sink is not supported")
 	}
