@@ -22,14 +22,14 @@ func (m *mockSQS) SendMessage(*sqs.SendMessageInput) (*sqs.SendMessageOutput, er
 func TestSQS(t *testing.T) {
 	mock := mockSQS{Counter: 0}
 
-	q := &SQS{
+	s := &SQS{
 		Client: &mock,
 		Url:    "http://localhost:9324/sqs/123",
 	}
 
-	q.Push([]byte("test"))
-	q.Push([]byte("test"))
-	q.Push([]byte("test"))
+	s.Push([]byte("test"))
+	s.Push([]byte("test"))
+	s.Push([]byte("test"))
 
 	if mock.Counter != 3 {
 		t.Errorf("SQS did not receive push")
