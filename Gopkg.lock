@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  branch = "master"
+  digest = "1:ef0b62f4f9e083d23a2dd519f5a2c886f10ed3d5d12aed226ac2139499ef0a96"
+  name = "github.com/14bits/crowd"
+  packages = ["pkg/sink"]
+  pruneopts = "UT"
+  revision = "bb83eae2bf2f0d3cc23a42f350d0434c9757a3b0"
+
+[[projects]]
   digest = "1:088975c93f37a170f7d8468f70bdf46610e56212a5ef86b85f0dd028e16f1e7b"
   name = "github.com/aws/aws-sdk-go"
   packages = [
@@ -61,6 +69,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/14bits/crowd/pkg/sink",
     "github.com/aws/aws-sdk-go/aws",
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/sqs",

@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://github.com/14-bits/crowd/blob/master/docs/logo.png?raw=true" width="200">
+  <img src="https://github.com/14bits/crowd/blob/master/docs/logo.png?raw=true" width="200">
   <h3 align="center" style="margin-top: -100px">crowd</h3>
   <p align="center">High Available Reverse Proxy for Asynchronous Message Consumption<p>
   <p align="center">
-    <a href="https://travis-ci.org/14-bits/crowd"><img src="https://img.shields.io/travis/14-bits/crowd.svg?maxAge=120"></a>
-    <a href="http://github.com/14-bits/crowd/releases"><img src="https://img.shields.io/github/release/14-bits/crowd.svg?maxAge=120"></a>
+    <a href="https://travis-ci.org/14bits/crowd"><img src="https://img.shields.io/travis/14bits/crowd.svg?maxAge=120"></a>
+    <a href="http://github.com/14bits/crowd/releases"><img src="https://img.shields.io/github/release/14bits/crowd.svg?maxAge=120"></a>
   </p>
 </p>
 
@@ -17,7 +17,7 @@
 The project started because of a common usecase for an endpoint (HTTP) to ingest data, where the user on the client side expects to receive a delivery confirmation that the message has been received, yet the response itself doens't matter.
 
 <p align="center">
-  <img src="https://github.com/14-bits/crowd/blob/master/docs/problem.png?raw=true" width="500">
+  <img src="https://github.com/14bits/crowd/blob/master/docs/problem.png?raw=true" width="500">
 </p>
 
 On a company that I used to work for, that was the case for the entry point of leads, which is the source of 💰 that must be always available.
@@ -63,13 +63,13 @@ That way you can easily control an acceptable throughput to the rest of your sys
 You can use crowd to handle back-pressure on existing endpoints and scale your current REST APIs to consume the messages later:
 
 <p align="center">
-  <img src="https://github.com/14-bits/crowd/blob/master/docs/usecase-1.png?raw=true" width="500">
+  <img src="https://github.com/14bits/crowd/blob/master/docs/usecase-1.png?raw=true" width="500">
 </p>
 
 Or even as an entrypoint to your stream/queues with multiple consumers:
 
 <p align="center">
-  <img src="https://github.com/14-bits/crowd/blob/master/docs/usecase-2.png?raw=true" width="500">
+  <img src="https://github.com/14bits/crowd/blob/master/docs/usecase-2.png?raw=true" width="500">
 </p>
 
 ### Disclaimer

@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/14-bits/crowd/pkg/sink"
+	"github.com/14bits/crowd/pkg/sink"
 	"github.com/julienschmidt/httprouter"
 )
 
